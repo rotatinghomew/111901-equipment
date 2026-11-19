@@ -1,0 +1,13 @@
+site,route,skill,weekly_slots
+s1,rt01,mechanical,5
+s2,rt02,inspection,7
+s3,rt03,electrical,3
+s0,rt04,mechanical,5
+s1,rt05,inspection,7
+s2,rt06,electrical,3
+s3,rt07,mechanical,5
+s0,rt08,inspection,7
+s1,rt09,electrical,3
+s2,rt10,mechanical,5
+s3,rt11,inspection,7
+s0,rt12,electrical,3
