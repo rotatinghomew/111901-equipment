@@ -1,0 +1,22 @@
+{
+  "policy_id": "review_sampling",
+  "priority_weights": {
+    "safety": 0.40,
+    "mismerge_consequence": 0.20,
+    "uncertain": 0.15,
+    "unseen_family": 0.15,
+    "chase_volume": 0.10
+  },
+  "min_rotation_fraction": 0.3,
+  "rotation_seed": 20260728,
+  "skills_by_category": {
+    "c0": "mechanical",
+    "c1": "mechanical",
+    "c2": "inspection",
+    "c3": "electrical",
+    "c4": "inspection"
+  },
+  "abstain_skill": "inspection",
+  "safety_escalation_note": "疑似安全故障为强制现场项；名额不足时进入升级清单，不得标记为可继续开放。",
+  "estimation_note": "仅轮换抽样（含已知入样机会）可外推总体错误率；风险派发样本的入样机会未知，禁止用于外推和排班。"
+}

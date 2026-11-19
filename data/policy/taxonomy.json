@@ -1,0 +1,66 @@
+{
+  "policy_id": "fault_taxonomy",
+  "current_version": "v2",
+  "versions": [
+    {
+      "version": "v1",
+      "effective_from": "2026-01-01",
+      "effective_to": "2026-07-19",
+      "note": "首版五类口径。处置记录中的 c0-c4 均按本版登记。",
+      "categories": [
+        {"code": "c0", "name": "异响", "safety_relevant": false, "skill": "mechanical"},
+        {"code": "c1", "name": "松动", "safety_relevant": false, "skill": "mechanical"},
+        {"code": "c2", "name": "保护罩故障", "safety_relevant": true, "skill": "inspection"},
+        {"code": "c3", "name": "电气", "safety_relevant": true, "skill": "electrical"},
+        {"code": "c4", "name": "其他", "safety_relevant": false, "skill": "inspection"}
+      ],
+      "rules": [
+        {"id": "v1-noise", "any": ["异响"], "category": "c0"},
+        {"id": "v1-loose", "any": ["松动"], "category": "c1"},
+        {"id": "v1-guard", "any": ["保护罩"], "category": "c2"},
+        {"id": "v1-chase", "any": ["催问"], "category": null, "chase": true}
+      ]
+    },
+    {
+      "version": "v2",
+      "effective_from": "2026-07-20",
+      "effective_to": null,
+      "note": "细类细化版。老报告不按新细类重拆，历史标签经 lineage 解释；无细分证据时映射到父类。",
+      "categories": [
+        {"code": "c0", "name": "异响", "safety_relevant": false, "skill": "mechanical"},
+        {"code": "c0.1", "name": "金属异响", "parent": "c0", "safety_relevant": false, "skill": "mechanical"},
+        {"code": "c0.2", "name": "摩擦异响", "parent": "c0", "safety_relevant": false, "skill": "mechanical"},
+        {"code": "c1", "name": "松动", "safety_relevant": false, "skill": "mechanical"},
+        {"code": "c1.1", "name": "座椅松动", "parent": "c1", "safety_relevant": false, "skill": "mechanical"},
+        {"code": "c2", "name": "保护罩故障", "safety_relevant": true, "skill": "inspection"},
+        {"code": "c3", "name": "电气", "safety_relevant": true, "skill": "electrical"},
+        {"code": "c4", "name": "其他", "safety_relevant": false, "skill": "inspection"}
+      ],
+      "rules": [
+        {"id": "v2-metal", "all": ["异响", "金属"], "category": "c0.1"},
+        {"id": "v2-friction", "all": ["异响", "摩擦"], "category": "c0.2"},
+        {"id": "v2-noise", "any": ["异响"], "category": "c0"},
+        {"id": "v2-seat", "all": ["座椅", "松动"], "category": "c1.1"},
+        {"id": "v2-loose", "any": ["松动"], "category": "c1"},
+        {"id": "v2-guard", "any": ["保护罩"], "category": "c2"},
+        {"id": "v2-chase", "any": ["催问"], "category": null, "chase": true}
+      ],
+      "lineage": {
+        "c0": {"as_of": "v1", "interpretation": "v1 口径下的综合异响；v2 细化后无金属/摩擦证据时仍记父类 c0，不硬拆。"},
+        "c1": {"as_of": "v1", "interpretation": "v1 口径下的综合松动；v2 中无座椅等部位证据时仍记父类 c1，不硬拆。"},
+        "c2": {"as_of": "v1", "interpretation": "v1 保护罩故障在 v2 中含义未变，安全相关属性保留。"},
+        "c3": {"as_of": "v1", "interpretation": "v1 电气类在 v2 中含义未变，安全相关属性保留。"},
+        "c4": {"as_of": "v1", "interpretation": "v1 其他类在 v2 中含义未变；历史 c4 不反向猜测细类。"}
+      }
+    }
+  ],
+  "uncertainty_markers": ["疑似", "待复查", "需要复查"],
+  "impact_markers": [
+    {"marker": "影响使用", "level": "service_affected"},
+    {"marker": "故障", "level": "service_degraded"}
+  ],
+  "impact_levels_ordered": ["none", "service_degraded", "service_affected"],
+  "default_impact": "service_degraded",
+  "chase_impact": "none",
+  "abstain_category": null
+}
